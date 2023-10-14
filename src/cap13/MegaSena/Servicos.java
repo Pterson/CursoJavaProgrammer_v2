@@ -1,11 +1,6 @@
 package cap13.MegaSena;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 
 
 // When  -> Quando
@@ -14,6 +9,29 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class Servicos {
+
+//	@BeforeAll
+//	static void iniciarAntesDeTodosTestes(){
+//
+//		System.out.println("BeforeAll: Iniciando conexão com out banco");
+//	}
+//	@BeforeEach
+//	void iniciarAntesDeCadaTeste(){
+//
+//		System.out.println("BeforeEach: Iniciando conexão com out banco");
+//	}
+//
+//	@AfterAll
+//	static void executaNoFinalDeTodosTestes(){
+//
+//		System.out.println("Acabou todos os testes");
+//	}
+//
+//	@AfterEach
+//	void executaNoFinalDeCadaTeste(){
+//
+//		System.out.println("Acabou um teste");
+//	}
 	
 	@Test
 	@Order(1)
@@ -48,5 +66,23 @@ public class Servicos {
 			System.out.print(numero + " ");
 		}
 	}
+
+	@Test
+	void validadorNumerosMega () {
+
+		int [] array = MegaSenaUtilitario.numerosSorteados();
+
+		for(int i =0; i< array.length; i++) {
+			for (int j = 0; j < array.length; j++) {
+
+				int i1 = array[i];
+				int i2 = array[j];
+				if(i != j && i1 == i2){
+					Assertions.fail("Valor já existente!!!");
+				}
+			}
+		}
+	}
+
 }
 
