@@ -2,6 +2,8 @@ package cap13.MegaSena;
 
 import org.junit.jupiter.api.*;
 
+import java.util.Set;
+
 
 // When  -> Quando
 // Given -> Dado
@@ -82,7 +84,13 @@ public class Servicos {
 				}
 			}
 		}
+
 	}
+	@Test
+	void validadorNumerosMegaListSet() {
+			int quantidade =10;
+		//	Set<Integer> jogoMegaSena = MegaSenaUtilitario.numerosSorteados(10, quantidade);
+		}
 
 }
 

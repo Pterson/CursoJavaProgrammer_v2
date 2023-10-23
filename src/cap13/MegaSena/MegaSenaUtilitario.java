@@ -1,6 +1,8 @@
 package cap13.MegaSena;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class MegaSenaUtilitario {
 
@@ -43,6 +45,18 @@ public class MegaSenaUtilitario {
             if (validador) {
                 jogoMegaSena[i] = numeroSorteado;
             }
+
+        }
+        return jogoMegaSena;
+    }
+
+    public static Set<Integer> numerosSorteados(int NumeroSorteado, int quantidade ) {
+
+        Set<Integer> jogoMegaSena = new HashSet<>(quantidade);
+
+        while (jogoMegaSena.size() < quantidade) {
+            int numeroSorteado = sortearNumero(NumeroSorteado);
+
 
         }
         return jogoMegaSena;
