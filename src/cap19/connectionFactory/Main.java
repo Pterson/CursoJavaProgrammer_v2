@@ -1,4 +1,4 @@
-package cap15.FabricaConexao;
+package cap19.connectionFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
