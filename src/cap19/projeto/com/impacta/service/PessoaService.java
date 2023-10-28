@@ -35,4 +35,28 @@ public class PessoaService {
     }
 
     public List<Pessoa> buscarTodos() { return pessoaRepository.findByAll(); }
+    public void excluir(int idPessoa) {
+        int linhasExcluidas = pessoaRepository.delete(idPessoa);
+        if (linhasExcluidas == 0) {
+            throw new PessoaException("Não foi possivel excluir, pessoa com ID: " + idPessoa);
+        }
+    }
+
+    public Pessoa atualizar(Pessoa pessoa) {
+        Pessoa pessoaEntity = buscarPessoa(pessoa.getIdPessoa());
+
+        if (pessoaEntity != null) {
+            Pessoa pessoaCpf = this.buscarCpf(pessoa.getCpf());
+
+            if (pessoaCpf == null || pessoaCpf.getIdPessoa() == pessoaEntity.getIdPessoa()) {
+                pessoaEntity = pessoaRepository.update(pessoa);
+                return pessoaEntity;
+            }
+            return pessoaCpf;
+        }
+        return null;
+    }
+
+
+
 }

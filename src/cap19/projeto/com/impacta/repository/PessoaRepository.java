@@ -80,6 +80,7 @@ public class PessoaRepository implements PessoaRepositoryInterface {
 
     @Override
     public List<Pessoa> findByAll() {
+        List<Pessoa> pessoas = new ArrayList<>();
 
         String queryBuscarSql = "SELECT * FROM db_impacta.tb_pessoa";
 
@@ -88,22 +89,60 @@ public class PessoaRepository implements PessoaRepositoryInterface {
 
             ResultSet resultSet = statement.executeQuery(queryBuscarSql);
 
-            // TODO: 26/10/2023 preciso pegar cada linha data tabela
-            // TODO: 26/10/2023 add em uma lista e retornar os objetos
+            boolean isNotNullpessoa;
+            do{
+                Pessoa pessoa = getPessoa(resultSet);
+                isNotNullpessoa = pessoa != null;
+                if(isNotNullpessoa) {
+                    pessoas.add(pessoa);
+                }
+            } while (isNotNullpessoa);
 
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-        return new ArrayList<>();
+        return pessoas;
     }
 
 
     @Override
     public Pessoa update(Pessoa pessoa) {
+
+        String queryBuscarSql = "UPDATE db_impacta.tb_pessoa SET NOME = ?, CPF = ? WHERE (`ID_PESSOA` = ?)";
+
+        try(Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(queryBuscarSql)) {
+
+            preparedStatement.setString(1, pessoa.getNome());
+            preparedStatement.setString(2, pessoa.getCpf());
+            preparedStatement.setInt(3, pessoa.getIdPessoa());
+
+            if(preparedStatement.executeUpdate() > 0) {
+                return findByIdPessoa(pessoa.getIdPessoa());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
+
     @Override
     public int delete(int idPessoa) {
+
+        String queryBuscarSql = "DELETE FROM db_impacta.tb_pessoa WHERE ID_PESSOA = ?";
+
+        try(Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(queryBuscarSql)){
+
+            preparedStatement.setInt(1, idPessoa);
+
+            int linhasExluidas = preparedStatement.executeUpdate();
+            if(linhasExluidas > 0) {
+                return linhasExluidas;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 

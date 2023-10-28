@@ -83,4 +83,40 @@ static void start() {
         Assertions.assertTrue(pessoas.isEmpty());
     }
 
+    @Test
+    void excluirIdPessoa() {
+        try {
+            int idPessoa = 5;
+            pessoaController.excluir(idPessoa);
+            Pessoa pessoa = pessoaController.buscarPessoa(idPessoa);
+            //Assertions.assertTrue(pessoa == null);
+            Assertions.assertNull(pessoa);
+            System.out.println("Exclusão Efetuada!!!");
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            Assertions.assertTrue(e instanceof PessoaException);
+        }
+    }
+
+    @Test
+    void atualizarNomeCorreto() {
+        Pessoa pessoa = new Pessoa(1, "LEOA", "98765432110");
+
+        Pessoa pessoaEntity = pessoaController.atualizar(pessoa);
+        Assertions.assertNotNull(pessoaEntity);
+        Assertions.assertEquals(pessoa.getNome(), pessoaEntity.getNome());
+
+        System.out.println("O nome está correto!!!");
+    }
+
+    @Test
+    void validaCpfDuplicado() {
+        Pessoa pessoa = new Pessoa(1, "LEOA", "98765432110");
+
+        Pessoa pessoaEntity = pessoaController.atualizar(pessoa);
+        Assertions.assertNotNull(pessoaEntity);
+        Assertions.assertEquals(pessoa.getCpf(), pessoaEntity.getCpf());
+
+    }
+
 }

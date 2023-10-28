@@ -22,5 +22,10 @@ public class PessoaController {
 
     public List<Pessoa> buscarTodos() { return pessoaService.buscarTodos(); }
 
+    public void excluir(int idPessoa) { pessoaService.excluir(idPessoa); }
+
+    public Pessoa atualizar(Pessoa pessoa) {
+        return pessoaService.atualizar(pessoa);
+    }
 
 }
