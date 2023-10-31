@@ -1,4 +1,4 @@
-package cap19.projeto.com.impacta.model;
+package projeto.com.impacta.sistemadecadastro.model;
 public class Pessoa {
     private int idPessoa;
     private String nome;

@@ -1,9 +1,13 @@
-module com.example.sistemadecadastro {
+module projeto.com.impacta.sistemadecadastro {
     requires javafx.controls;
     requires javafx.fxml;
 
     requires com.dlsc.formsfx;
+    requires java.sql;
 
-    opens com.example.sistemadecadastro to javafx.fxml;
-    exports com.example.sistemadecadastro;
+    opens projeto.com.impacta.sistemadecadastro to javafx.fxml;
+    exports projeto.com.impacta.sistemadecadastro;
+
+    exports projeto.com.impacta.sistemadecadastro.controller;
+    opens projeto.com.impacta.sistemadecadastro.controller to javafx.fxml;
 }
